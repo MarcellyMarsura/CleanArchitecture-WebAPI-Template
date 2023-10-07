@@ -28,7 +28,7 @@ namespace WebAPI.Infrastructure.Data.Repository
         {
             var sql = @"SELECT [Id],[Descricao] FROM [Exemplo] WHERE Id = @Id";
 
-            return cnn.Query<Exemplo>(sql, id).FirstOrDefault();
+            return cnn.Query<Exemplo>(sql, new { id = id}).FirstOrDefault();
         }
 
         public List<Exemplo> FindAll()
@@ -50,7 +50,7 @@ namespace WebAPI.Infrastructure.Data.Repository
 
         public void Delete(int id)
         {
-            cnn.Execute($"DELETE FROM Exemplo WHERE Id = @id");
+            cnn.Execute($"DELETE FROM Exemplo WHERE Id = @id", new { id = id });
         }
 
         public void Dispose()
